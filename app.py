@@ -9,10 +9,10 @@ import librosa
 # Load pre-trained model
 model = joblib.load("model/stress_model.pkl")
 
-st.title("🧠 Real-Time Stress Detection (Hugging Face Spaces)")
+st.title("🧠 Real-Time Stress Detection App (Hugging Face Spaces)")
 
-# --- Face Detection ---
-st.header("Face Stress Detection")
+# --- Face Stress Detection ---
+st.header("Face Detection")
 image_file = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
 if image_file:
     file_bytes = np.asarray(bytearray(image_file.read()), dtype=np.uint8)
@@ -25,8 +25,8 @@ if image_file:
     else:
         st.write("No face detected!")
 
-# --- Audio Detection ---
-st.header("Voice Stress Detection")
+# --- Voice Stress Detection ---
+st.header("Voice Detection")
 audio_file = st.file_uploader("Upload a voice file", type=["wav", "mp3"])
 if audio_file:
     y, sr = librosa.load(audio_file, sr=None)
@@ -34,7 +34,7 @@ if audio_file:
     prediction = model.predict(features)
     st.write("Predicted stress level:", prediction[0])
 
-# --- CSV Prediction ---
+# --- CSV Feature Prediction ---
 st.header("Predict from CSV Features")
 csv_file = st.file_uploader("Upload CSV with features", type=["csv"])
 if csv_file:
